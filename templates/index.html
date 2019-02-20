@@ -10,96 +10,93 @@
 </head>
 
 <body>
-  <div clas="container">
-    <div class="jumbotron text-center">
-      <h1>Mission To Mars</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
-    </div>
-      
-    <!-- surf data -->
-    <div class="row">
-      <div class="col-md-12 col-md-offset-2">
-        
-        <h3>Latest Mars News</h3>
-        <h4> {{ marsdata.news_title }} </h4>
-        <p>{{ marsdata.news_det }}</p><br>
-      </div>
-    </div>
-
-    <div class="row">
-          <div class="col-sm-4 col-md-offset-2">
-            
-              <h3>Featured Mars Image</h3>
-              <p><img src= {{ marsdata.picture_url }} width: 50% height="800" width="900"></p>
-            
-            </div>
-          <div class="col-sm-4 col-md-offset-2">
-                     <div class="row">
-                           <div class="col-md-12">
-                                  <div class="panel panel-default" style="max-width: 40rem;padding:20px;">
-                                    <div class="card-body">
-                                      <h4 class="card-title">Current Weather In Mars</h4>
-                                         <p class="card-text">{{ marsdata.weather }}</p>
-
-                                    </div>
-                                  </div>
-
-
-                                  
-
-
-
-                              </div>
-                          </div>
-                      <div class="row"></div>
-                                  <div class="col-md-12">
-                                          <h5><b>Mars Facts</b></h5><br>
-                                          {{marsdata.fact_html|safe }}
-                                    </div>
-                          </div>         
+    <div class="container">
+       <div class="jumbotron text-center">
+          <h1>Mission To Mars</h1>
+          <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+       </div>
+       <!-- surf data -->
+       <div class="row">
+          <div class="col-md-12 ">
+             <h3>Latest Mars News</h3>
+             <h4> {{ marsdata.news_title }} </h4>
+             <p>{{ marsdata.news_det }}</p>
+             <br>
+          </div>
+       </div>
+       
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Featured Mars Image</h3>
+                <div><img class="img-responsive" src= {{ marsdata.picture_url }}  ></div>
+             </div>
+             <div class="col-sm-4">
+             <div class="row">
+                <div class="col-md-12">
+                   <div class="panel panel-default">
+                      <div class="panel-body">
+                         <h4>Current Weather In Mars</h4>
+                         <p class="card-text">{{ marsdata.weather }}</p>
+                      </div>
+                   </div>
                 </div>
-        </div>
-
-
-          <br><br><br>
-            <div class="row col-md-offset-2">
-              <div class="col-md-10 col-md-offset-2">
-                
-                <h3><center>Mars Hemispheres</center></h3>
-                <hr style="height:2px;background-color:black ">
-               
-              </div>
-            </div>
-            <div class="row col-md-offset-2">
-                      <div class="col-md-5 col-md-offset-2">
-                        <figure class="figure">
-                        <img src= {{ marsdata.hemisphere[0].img_url }} class="img-fluid" alt="Responsive image" height="400" width="400">
-                         <figcaption class="figure-caption text-left">{{marsdata.hemisphere[0].title}}</figcaption>
-                      </figure>
-                      </div>
-                      <div class="col-md-5 ">
-                        <figure class="figure">
-                          <img src= {{ marsdata.hemisphere[1].img_url }} class="img-fluid" alt="Responsive image" height="400" width="400">
-                           <figcaption class="figure-caption text-left">{{marsdata.hemisphere[1].title}}</figcaption>
-                        </figure>
-                      </div>
-            </div><br><br>
-            <div class="row col-md-offset-2">
-              <div class="col-md-5 col-md-offset-2">
-                <figure class="figure">
-                  <img src= {{ marsdata.hemisphere[2].img_url }} class="img-fluid" alt="Responsive image" height="400" width="400">
-                   <figcaption class="figure-caption text-left">{{marsdata.hemisphere[2].title}}</figcaption>
-                </figure>
-              </div>
-              <div class="col-md-5 ">
-                <figure class="figure">
-                  <img src= {{ marsdata.hemisphere[3].img_url }} class="img-fluid" alt="Responsive image" height="400" width="400">
-                   <figcaption class="figure-caption text-left">{{marsdata.hemisphere[3].title}}</figcaption>
-                </figure>
-              </div>
+             </div>
+             <div class="row"></div>
+             <div class="col-md-12">
+                <h5><b>Mars Facts</b></h5>
+                <br>
+                {{marsdata.fact_html|safe }}
+             </div>
+          </div>
+       </div>
+    <br><br><br>
+    <div class="row">
+       <div class="col-md-12">
+          <h3>
+             <center>Mars Hemispheres</center>
+          </h3>
+          <hr style="height:1px;background-color:grey ">
+       </div>
     </div>
-  </div>
+    <div class="row">
+       <div class="col-md-5 col-md-offset-1">
+          <div style="border: 1px solid grey;margin-bottom:10px;padding:5px">
+          <figure class="figure">
+             <img src= {{ marsdata.hemisphere[0].img_url }} class="img-responsive" alt="Responsive image" >
+             <figcaption class="figure-caption text-left" style="font-weight:200">{{marsdata.hemisphere[0].title}}</figcaption>
+          </figure>
+          </div>
+       </div>
+       <div class="col-md-5">
+          <div style="border: 1px solid grey;margin-bottom:10px;padding:5px">
+             <figure class="figure">
+                <img src= {{ marsdata.hemisphere[1].img_url }} class="img-responsive" alt="Responsive image" >
+                <figcaption class="figure-caption text-left">{{marsdata.hemisphere[1].title}}</figcaption>
+             </figure>
+          </div>
+       </div>
+    </div>
+    <br><br>
+    <div class="row">
+       <div class="col-md-5 col-md-offset-1">
+          <div style="border: 1px solid grey;margin-bottom:10px;padding:5px">
+          <figure class="figure" >
+             <img src= {{ marsdata.hemisphere[2].img_url }} class="img-responsive" alt="Responsive image">
+             <figcaption class="figure-caption text-left">{{marsdata.hemisphere[2].title}}</figcaption>
+          </figure>
+          </div>
+       </div>
+       <div class="col-md-5">
+          <div style="border: 1px solid grey;margin-bottom:10px;padding:5px">
+          <figure class="figure">
+             <img src= {{ marsdata.hemisphere[3].img_url }} class="img-responsive" alt="Responsive image">
+             <figcaption class="figure-caption text-left">{{marsdata.hemisphere[3].title}}</figcaption>
+          </figure>
+          </div>
+       </div>
+    </div>
+    </div>
+ </body>
 
-</body>
 </html>
 

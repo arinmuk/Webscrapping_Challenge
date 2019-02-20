@@ -128,7 +128,7 @@ def scrape():
                     imgtext=pic["src"]
                 dict_build["img_url"]=suburl5+imgtext
         mars_data['hemisphere']=hemisphere_image_urls
-        db.mars_scrape.update({},mars_data,upsert=True)
+        #db.mars_scrape.update({},mars_data,upsert=True)
         return mars_data
 
 #scrape()
