@@ -96,7 +96,8 @@ def scrape():
         df = table[0]
 
         #df.columns = ['Equatorial Diameter', 'Polar Diameter', 'Mass', 'Moons','Orbit Distance', 'Orbit Period', 'Surface Temperature ', 'First Record','Recorded By']
-        df=df.rename(columns={0:'fact_name',1:'fact_info'})
+        df=df.rename(columns={0:'description',1:'value'})
+        df=df.set_index('description')
         html_table = df.to_html()
         #html_table
         mars_data["fact_html"]=html_table
