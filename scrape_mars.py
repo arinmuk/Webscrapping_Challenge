@@ -73,23 +73,23 @@ def scrape():
         response = requests.get(url3)
         soup3 = BeautifulSoup(response.text, 'html.parser')
         mars_wea= soup3.find_all('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")
-        search_string='Sol 2319'
+        mwea=[]
         for wea_res in mars_wea:
-                #print(wea_res)
-                #print('-----------')
-                #print(wea_res.text)
-                #print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-                if(search_string in wea_res.text ):
-                    weather_data=wea_res.text
-
-        str_remove=weather_data.find('pi')
+            
+            #print(wea_res.text)
+            #print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+            #if(search_string in wea_res.text ):
+                #weather_data=wea_res.text
+            mwea.append(wea_res.text)
+        weather_mars=mwea[0]    
+        str_remove=weather_mars.find('pi')
         #str_len=len(weather_data)
         #cutoff= str_len-str_len
         #print(str_remove)
         #print(str_len)
         #print(cutoff)
-        weather_data = weather_data[:str_remove]
-        #print(weather_data)
+        weather_data = weather_mars[:str_remove]
+        print(weather_data)
         mars_data["weather"]=weather_data
         url4='https://space-facts.com/mars/'
         table= pd.read_html(url4)
