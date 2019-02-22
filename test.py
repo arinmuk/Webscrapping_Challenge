@@ -26,18 +26,19 @@ def scrape():
         title=[]
         description=[]
         for result in results:
-                # Error handling
-                try:
-                    # Identify and return title of listing
-                    desc = result.find('div', class_="rollover_description_inner").text
-                    # Identify and return price of listing
-                    title.append(result.a["href"])
-                    description.append(desc)
+            # Error handling
+            try:
+                # Identify and return title of listing
+                #desc = result.find('div', class_="rollover_description_inner").text
+                desc = result.find('div', class_="rollover_description_inner").text
+                # Identify and return price of listing
+                title.append(result.a["href"])
+                description.append(desc)
 
-                    # Print results only if title, price, and link are available
-                
-                except AttributeError as e:
-                    print(e)
+                # Print results only if title, price, and link are available
+            
+            except AttributeError as e:
+                print(e)
         #print(title)
         #print(description)
         split_title= title[0].split("/")
