@@ -1,7 +1,4 @@
 
-from flask import Flask, render_template, redirect
-from flask_pymongo import PyMongo
-import scrape_mars
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -9,6 +6,15 @@ import pandas as pd
 import textwrap
 import pymongo
 import datetime as datetime
+#import requests
+from splinter import Browser
+#from bs4 import BeautifulSoup
+#from selenium import webdriver
+#from selenium.webdriver.common.by import By
+#from selenium.webdriver.support.ui import WebDriverWait
+#from selenium.webdriver.support import expected_conditions as EC
+executable_path = {"executable_path": "chromedriver"}
+browser=Browser("chrome", **executable_path, headless=False)
 
 
 #mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
@@ -20,9 +26,23 @@ def scrape():
         mars_scrape_col = db.mars_scrape.find()
         mars_data["scrape_time"]=str(datetime.datetime.now())
         url1='https://mars.nasa.gov/news/'
-        response = requests.get(url1)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        results = soup.find_all('div', class_="image_and_description_container")
+        browser.visit(url1)
+        browser.is_element_present_by_id("grid_gallery module list_view", 1)
+        html = browser.html
+        news_soup = BeautifulSoup(html, "html.parser")
+        print(news_soup.prettify())
+        results1 = news_soup.find_all('div', class_="content_title")
+        #results = soup.find_all('section', class_="grid_gallery module list_view")
+        results1
+        news_headlines=[]
+        for newst in results1:
+            news_headlines.append(newst.text)
+            #print(newst.text)
+        news_headlines
+        print(news_headlines[0])
+        mars_data["news_title"] = news_headlines[0]
+        results = news_soup.find_all('div', class_="image_and_description_container")
+        results
         title=[]
         description=[]
         for result in results:
@@ -39,22 +59,22 @@ def scrape():
             
             except AttributeError as e:
                 print(e)
-        #print(title)
-        #print(description)
-        split_title= title[0].split("/")
-        nasa_head=split_title[len(split_title)-2].title().replace("-", " ")
-        nasa_news=description[0].rstrip('\n')
+        #print(title[0])
+        print(description[0])
+        print(news_headlines[0])
+        news_headlines
 
-        #print(nasa_head)
-        #print(nasa_news)
-        mars_data["news_title"] = nasa_head
-        mars_data["news_det"] = nasa_news
+        mars_data["news_det"] = description[0]
 
+
+
+
+        ##*************************************
         url2='https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
         part_urlstr='https://www.jpl.nasa.gov'
         response = requests.get(url2)
         soup2 = BeautifulSoup(response.text, 'html.parser')
-       #img_res= soup2.find_all('a', class_="fancybox")
+        #img_res= soup2.find_all('a', class_="fancybox")
         img_res= soup2.find_all('li', class_="slide")
         img_res
         #img_res= soup2.find_all('div', class_="img")

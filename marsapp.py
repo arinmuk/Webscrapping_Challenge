@@ -8,11 +8,14 @@ import pandas as pd
 import textwrap
 import pymongo
 import datetime as datetime
+#mongo = PyMongo(app, uri="mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true")
 
 app = Flask(__name__)
-mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
+#mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
+mongo = PyMongo(app, uri="mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true")
 mars_data={}
-conn = 'mongodb://localhost:27017'
+#conn = 'mongodb://localhost:27017'
+conn ='mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true'
 client = pymongo.MongoClient(conn)
 db = client.mars_data
 mars_scrape_col = db.mars_scrape.find()
@@ -20,7 +23,7 @@ mars_scrape_col = db.mars_scrape.find()
 
 @app.route('/')
 def index():
-    marsdata = mongo.db.mars_scrape.find_one()
+    marsdata = db.mars_scrape.find_one()
     return render_template('index.html', marsdata=marsdata)
 
 
@@ -28,9 +31,9 @@ def index():
 def scrape():
     mars = mongo.db.mars_scrape
     data = scrape_mars.scrape()
-    mars.update(
+    mars.update_one(
         {},
-        data,
+        {"$set":data},
         upsert=True
     )
     return redirect("/", code=302)
