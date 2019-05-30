@@ -1,1 +1,1 @@
-web: gunicorn Webscraping_Challenge.app:marsapp
+web: gunicorn marsapp.app:app
