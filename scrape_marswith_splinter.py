@@ -119,7 +119,7 @@ def scrape():
 
         #df.columns = ['Equatorial Diameter', 'Polar Diameter', 'Mass', 'Moons','Orbit Distance', 'Orbit Period', 'Surface Temperature ', 'First Record','Recorded By']
         df=df.rename(columns={0:'description',1:'value'})
-        df=df.set_index('description')
+        #df=df.set_index('description')
         #print(list(df.columns))
         #df.head(9)
         html_table = df.to_html()

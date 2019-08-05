@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
-import scrape_mars
+import scrape_marswith_splinter
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -11,10 +11,10 @@ import datetime as datetime
 #mongo = PyMongo(app, uri="mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true")
 
 app = Flask(__name__)
-#mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
+####mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
 mongo = PyMongo(app, uri="mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true")
 mars_data={}
-#conn = 'mongodb://localhost:27017'
+#####conn = 'mongodb://localhost:27017'
 conn ='mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true'
 client = pymongo.MongoClient(conn)
 db = client.mars_data
@@ -30,7 +30,7 @@ def index():
 @app.route('/scrape')
 def scrape():
     mars = mongo.db.mars_scrape
-    data = scrape_mars.scrape()
+    data = scrape_marswith_splinter.scrape()
     mars.update_one(
         {},
         {"$set":data},

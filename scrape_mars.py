@@ -14,7 +14,8 @@ import datetime as datetime
 #mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
 def scrape():
         mars_data={}
-        conn = 'mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true'
+        #conn = 'mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true'
+        conn = 'mongodb://localhost:27017'
         client = pymongo.MongoClient(conn)
         db = client.mars_data
         mars_scrape_col = db.mars_scrape.find()
@@ -98,7 +99,7 @@ def scrape():
 
         #df.columns = ['Equatorial Diameter', 'Polar Diameter', 'Mass', 'Moons','Orbit Distance', 'Orbit Period', 'Surface Temperature ', 'First Record','Recorded By']
         df=df.rename(columns={0:'description',1:'value'})
-        df=df.set_index('description')
+        #df=df.set_index('description')
         #print(list(df.columns))
         #df.head(9)
         html_table = df.to_html()
