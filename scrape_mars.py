@@ -14,8 +14,8 @@ import datetime as datetime
 #mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_data")
 def scrape():
         mars_data={}
-        #conn = 'mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true'
-        conn = 'mongodb://localhost:27017'
+        conn = 'mongodb+srv://arinmuk:amarji123!@cluster0-omshy.mongodb.net/test?retryWrites=true'
+        #conn = 'mongodb://localhost:27017'
         client = pymongo.MongoClient(conn)
         db = client.mars_data
         mars_scrape_col = db.mars_scrape.find()

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
-import scrape_marswith_splinter
+import scrape_mars
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -30,7 +30,7 @@ def index():
 @app.route('/scrape')
 def scrape():
     mars = mongo.db.mars_scrape
-    data = scrape_marswith_splinter.scrape()
+    data = scrape_mars.scrape()
     mars.update_one(
         {},
         {"$set":data},
